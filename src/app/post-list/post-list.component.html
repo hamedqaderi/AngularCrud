@@ -1,0 +1,9 @@
+<aside class="menu">
+
+    <p class="menu-label">Posts</p>
+
+    <ul class="menu-list" *ngFor="let post of posts">
+      <li (click)="onSelectPost(post)"><a>{{ post.title }}</a></li>
+    </ul>
+  </aside>
+  

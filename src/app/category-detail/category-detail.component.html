@@ -1,0 +1,27 @@
+<section class="section" *ngIf="editTitle">
+  <form #form novalidate>
+    <div class="field" >
+      <label for="name">Category Name</label>
+      <div class="control">
+        <input #name="ngModel" type="text" name="name" class="input" [(ngModel)]="category.name" [class.is-danger]="name.invalid" required>
+        <p class="help is-danger" *ngIf="name.invalid">Name field is required</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <button [disabled]="name.invalid" type="submit" class="button is-link" (click)="updateCategory()">Save Category</button>
+    </div>
+    
+    <div class="field">
+      <button type="submit" class="button is-danger" (click)="deleteCategory()">Delete</button>
+    </div>
+  </form>
+</section>
+
+<article *ngIf="category">
+  <h1 class="title">{{ category.name }}</h1>
+
+  <hr>
+
+  <a class="button is-link" (click)="onEditTitle()" *ngIf="!editTitle">Update Name</a>
+</article>

@@ -1,0 +1,46 @@
+<div class="columns">
+  <div class="column is-4">
+    <button *ngIf="!createForm" class="button is-primary mb-3" (click)="showCreateForm()">+ New Category</button>
+
+    <category-list (SelectCategory)="onSelect($event)" [categories]="categories"></category-list>
+  </div>
+
+  <div class="column is-8">
+    <form #myForm="ngForm" *ngIf="createForm" (ngSubmit)="onSubmitAddCategory(myForm.value)" class="mb-3">
+        <div class="field">
+          <label for="name">Category Title</label>
+          <div class="control">
+            <input type="text" class="input" name="name" required ngModel>
+          </div>
+        </div>
+  
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-link">Save</button>
+          </div>
+        </div>
+    </form>
+
+    <category-detail (deleteCategoryEvent)="onDeleteCategoryEvent($event)" 
+                     (updateCategoryEvent)="onUpdateCategoryEvent($event)" 
+    *ngIf="category && !createForm" [category]="category"></category-detail>
+  </div>
+</div>
+
+
+<div class="modal is-active" *ngIf="isActive">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Deleting Error</p>
+        <button class="delete" (click)="closeModal()" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <p>This category has related posts, which means you can not delete it. For Deleteing this category, you must delete all posts with the same category, and then come back and delete it.</p>
+        <p>Good Luck! :)</p>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button" (click)="closeModal()">Close</button>
+      </footer>
+    </div>
+</div>
